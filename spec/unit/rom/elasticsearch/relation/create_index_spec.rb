@@ -54,6 +54,8 @@ RSpec.describe ROM::Elasticsearch::Relation, '#create_index' do
             attribute :id, ROM::Elasticsearch::Types::ID
             attribute :name, ROM::Elasticsearch::Types.Keyword
             attribute :desc, ROM::Elasticsearch::Types.Text(analyzer: "snowball")
+            attribute :created_at, ROM::Elasticsearch::Types.Date
+            attribute :date_of_birth, ROM::Elasticsearch::Types.Date(format: "basic_date")
           end
 
           index_settings number_of_shards: 2
@@ -68,7 +70,9 @@ RSpec.describe ROM::Elasticsearch::Relation, '#create_index' do
         expect(relation.dataset.mappings).
           to eql("properties" => {
                    "name" => { "type" => "keyword" },
-                   "desc" => { "type" => "text", "analyzer" => "snowball" }})
+                   "desc" => { "type" => "text", "analyzer" => "snowball" },
+                   "created_at" => { "type" => "date" },
+                   "date_of_birth" => { "type" => "date", "format" => "basic_date" }})
       end
     end
   end

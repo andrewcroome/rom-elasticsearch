@@ -11,6 +11,15 @@ module ROM
       # Default integer primary key
       ID = Int.meta(primary_key: true)
 
+      # Define a date attribute type
+      #
+      # @return [Dry::Types::Type]
+      #
+      # @api public
+      def self.Date(meta = {})
+        Time.meta(type: "date").meta(meta)
+      end
+
       # Define a keywoard attribute type
       #
       # @return [Dry::Types::Type]
