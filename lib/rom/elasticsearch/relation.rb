@@ -194,7 +194,7 @@ module ROM
         if num.equal?(Undefined)
           options[:per_page]
         else
-          new(dataset.size(num), per_page: num)
+          new(dataset.size(num).from((options[:current_page] - 1) * num), per_page: num)
         end
       end
 
